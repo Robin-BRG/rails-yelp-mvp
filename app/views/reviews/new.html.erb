@@ -1,0 +1,35 @@
+<h1>Ajouter un avis pour <%= @restaurant.name %></h1>
+<%= simple_form_for [@restaurant, @review] do |form| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.input :content, as: :text, label: "Contenu de l'avis" %>
+  </div>
+
+  <div class="field">
+    <label>Note (1 à 5)</label>
+    <div class="rating">
+      <% (1..5).each do |rating| %>
+        <%= form.radio_button :rating, rating, id: "rating_#{rating}", class: "rating-input" %>
+        <label for="rating_#{rating}" class="rating-star">
+          <i class="fa-solid fa-star"></i>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.button :submit, "Ajouter l'avis" %>
+  </div>
+<% end %>
+
+<%= link_to 'Retour aux détails du restaurant', restaurant_path(@restaurant) %>

@@ -1,0 +1,34 @@
+<h1>Ajouter un nouveau restaurant</h1>
+<%= simple_form_for @restaurant do |form| %>
+  <% if @restaurant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
+      <ul>
+        <% @restaurant.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.input :name, label: "Nom du restaurant" %>
+  </div>
+
+  <div class="field">
+    <%= form.input :address, label: "Adresse" %>
+  </div>
+
+  <div class="field">
+    <%= form.input :phone_number, label: "Téléphone" %>
+  </div>
+
+  <div class="field">
+    <%= form.input :category, label: "Catégorie" %>
+  </div>
+
+  <div class="actions">
+    <%= form.button :submit, "Créer Restaurant" %>
+  </div>
+<% end %>
+<%= link_to 'Retour à la liste des restaurants', restaurants_path %>
